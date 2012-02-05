@@ -35,7 +35,7 @@
 
 Name:           jakarta-%{short_name}
 Version:        1.1
-Release:        %mkrel 3.3.7
+Release:        %mkrel 3.3.8
 Epoch:          0
 Summary:        Jakarta Commons Logging Package
 License:        Apache License
