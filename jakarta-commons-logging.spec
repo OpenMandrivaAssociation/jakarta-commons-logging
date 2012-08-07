@@ -35,8 +35,7 @@
 
 Name:           jakarta-%{short_name}
 Version:        1.1
-Release:        %mkrel 3.3.7
-Epoch:          0
+Release:        6
 Summary:        Jakarta Commons Logging Package
 License:        Apache License
 Group:          Development/Java
@@ -45,8 +44,8 @@ URL:            http://jakarta.apache.org/commons/%{base_name}/
 Source0:        http://www.apache.org/dist/jakarta/commons/logging/source/commons-logging-%{version}-src.tar.bz2
 Patch1:         %{short_name}-eclipse-manifest.patch
 BuildRequires:  ant
-BuildRequires:  avalon-framework
-BuildRequires:  avalon-logkit
+#BuildRequires:  avalon-framework
+#BuildRequires:  avalon-logkit
 BuildRequires:  java-rpmbuild
 BuildRequires:  junit 
 BuildRequires:  log4j
@@ -149,7 +148,16 @@ rm -rf $RPM_BUILD_ROOT
 # -----------------------------------------------------------------------------
 
 
+
 %changelog
+* Sun Nov 27 2011 Guilherme Moro <guilherme@mandriva.com> 1.1-6
++ Revision: 733983
+- rebuild
+- imported package jakarta-commons-logging
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - mass rebuild
+
 * Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.1-3.3.7mdv2011.0
 + Revision: 606058
 - rebuild
