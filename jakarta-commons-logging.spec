@@ -32,10 +32,11 @@
 %define short_name commons-%{base_name}
 %define section    free
 %define gcj_support 0
+%bcond_without	bootstrap
 
 Name:           jakarta-%{short_name}
 Version:        1.1
-Release:        %mkrel 3.3.7
+Release:        %mkrel 3.3.8
 Epoch:          0
 Summary:        Jakarta Commons Logging Package
 License:        Apache License
@@ -45,12 +46,15 @@ URL:            http://jakarta.apache.org/commons/%{base_name}/
 Source0:        http://www.apache.org/dist/jakarta/commons/logging/source/commons-logging-%{version}-src.tar.bz2
 Patch1:         %{short_name}-eclipse-manifest.patch
 BuildRequires:  ant
+%if !%{with bootstrap}
+BuildRequires:	ant-junit
 BuildRequires:  avalon-framework
 BuildRequires:  avalon-logkit
+%endif
 BuildRequires:  java-rpmbuild
 BuildRequires:  junit 
 BuildRequires:  log4j
-BuildRequires:  servletapi5
+BuildRequires:  servlet6
 %if %{gcj_support}
 BuildRequires:  java-gcj-compat-devel
 %else
@@ -88,11 +92,15 @@ cat > build.properties <<EOBM
 junit.jar=$(build-classpath junit)
 log4j.jar=$(build-classpath log4j)
 log4j12.jar=$(build-classpath log4j)
+%if !%{with bootstrap}
 logkit.jar=$(build-classpath avalon-logkit)
 avalon-framework.jar=$(build-classpath avalon-framework)
-servletapi.jar=$(build-classpath servletapi5)
+%endif
+servletapi.jar=$(build-classpath tomcat6-servlet-2.5-api)
 EOBM
+%if !%{with bootstrap}
 export OPT_JAR_LIST="ant/ant-junit"
+%endif
 %{ant} -Dsource.version=1.4 -Dtarget.version=1.4 clean compile
 #%{ant} -Dsource.version=1.4 -Dtarget.version=1.4 compile.tests test
 
